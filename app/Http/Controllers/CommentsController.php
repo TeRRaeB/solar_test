@@ -7,13 +7,18 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
+    /**
+     * Вывод всех комментариев
+     */
     public function allComments()
     {
-        $comment = new Comment;
-        // $comments = Comment::select(['id', 'parent_id', 'author', 'body', 'created_at'])->get();
+        $comment = new Comment; 
         return view('welcome', ['data' => $comment->orderBy('created_at', 'asc')->get()]);
     }
 
+    /**
+     * Добавление комментария
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -27,11 +32,17 @@ class CommentsController extends Controller
         return redirect('/');
     }
 
+    /**
+     * Удаление комментария
+     */
     public function delete($comment)
     {
         Comment::find($comment)->delete();
         return redirect('/');
     }
+    /**
+     * Редактирование комментария
+     */
     public function edit(Request $request)
     {
         $data = $request->all();
@@ -43,6 +54,10 @@ class CommentsController extends Controller
         );
         return redirect('/');
     }
+
+    /**
+     * Поиск комментарий к родительному комментарию.
+     */
     public function findParent(Request $request)
     {
         $data = $request->all();

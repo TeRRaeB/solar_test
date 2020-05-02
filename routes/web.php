@@ -13,20 +13,25 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*/ 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-//Route::get('/', CommentsController::index());
-
+/**
+ * Вывод всех комментариев
+ */
 Route::get('/', 'CommentsController@allComments')->name('index');
-// Добавление комментария:
+/**
+ *  Добавление комментария:
+ */
 Route::post('/', 'CommentsController@store')->name('AddComment');
-// Удаление комментария:
+/**
+ * Удаление комментария:
+ */
 Route::delete('/{comment}', 'CommentsController@delete')->name('DeleteComment');
-// Редактирование комментария
+/**
+ * Редактирование комментария
+ */
 Route::post('/post', 'CommentsController@edit')->name('Edit');
-// Просмотреть комментарии к комментарию
+/**
+ * Просмотреть комментарии к комментарию
+ */
 Route::post('/parent', 'CommentsController@findParent')->name('Parent');
